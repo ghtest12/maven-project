@@ -27,13 +27,13 @@ pipeline {
             parallel{
                 stage ('Deploy to Staging'){
                     steps {
-                        bat "winscp -i **/target/*.war root@${params.tomcat}:/usr/share/tomcat/webapps"
+                        sh "scp -i **/target/*.war root@${params.tomcat}:/usr/share/tomcat/webapps"
                     }
                 }
 
                 stage ("Deploy to Production"){
                     steps {
-                        bat "winscp -i **/target/*.war root@${params.tomcat}:/usr/share/tomcat-prod/webapps"
+                        sh "scp -i **/target/*.war root@${params.tomcat}:/usr/share/tomcat-prod/webapps"
                     }
                 }
             }
