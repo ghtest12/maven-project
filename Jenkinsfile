@@ -10,10 +10,10 @@ pipeline {
          pollSCM('* * * * *') // Polling Source Control
      }
  
-stages{
+     stages{
         stage('Build'){
             steps {
-                bat 'mvn clean package'
+                sh 'mvn clean package'
             }
             post {
                 success {
@@ -27,13 +27,13 @@ stages{
             parallel{
                 stage ('Deploy to Staging'){
                     steps {
-                        bat "scp -r **/target/*.war root@${params.tomcat}:/usr/share/tomcat/webapps"
+                        sh "scp -r **/target/*.war root@${params.tomcat}:/usr/share/tomcat/webapps"
                     }
                 }
 
                 stage ("Deploy to Production"){
                     steps {
-                        bat "scp -r **/target/*.war root@${params.tomcat}:/usr/share/tomcat-prod/webapps"
+                        sh "scp -r **/target/*.war root@${params.tomcat}:/usr/share/tomcat-prod/webapps"
                     }
                 }
             }
