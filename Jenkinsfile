@@ -8,7 +8,7 @@ pipeline {
 		}
 		stage(build){
 			steps{
-				ehco "Building..."
+				echo "Building..."
 			}
 		}
 		stage(deploy){
