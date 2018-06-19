@@ -1,1 +1,1 @@
-Hello, New World!
+Hello World!
